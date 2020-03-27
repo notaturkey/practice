@@ -1,0 +1,53 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+import copy
+# Complete the maxSubsetSum function below.
+def maxSubsetSum(arr, currChoices, choices):
+    if not choices:
+        return getSum(currChoices)
+
+    maxi = 0
+    bestChoice = []
+    for i in choices:
+        #maximize
+        if maxi < maxSubsetSum(arr, currChoices.append(i), getChoices(arr,currChoices)):
+            maxi = maxSubsetSum(arr, currChoices.append(i), getChoices(arr,currChoices))
+            besChoice = currChoices.append(i)   
+    return getSum(bestChoice)
+
+
+def getChoices(arr, currChoices):
+    retChoices = []
+    for i in range(len(arr)):
+        if arr[i] not in currChoices:
+            retChoices.append(i)
+        else:
+            i=i+1
+
+    return retChoices
+            
+            
+def getSum(arr):
+    temp = 0
+    for i in arr:
+        temp = temp +i
+    
+    return temp
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+    seen = []
+    res = maxSubsetSum(arr,seen,getChoices(arr,seen))
+
+    fptr.write(str(res) + '\n')
+
+    fptr.close()
